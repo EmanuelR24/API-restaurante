@@ -1,3 +1,34 @@
+/**
+ * Controlador para manejar las operaciones HTTP relacionadas con pedidos.
+ * 
+ * Esta clase actúa como intermediario entre las rutas de Express y el servicio
+ * de pedidos, manejando las solicitudes HTTP y devolviendo las respuestas
+ * apropiadas. Implementa los métodos para realizar operaciones CRUD sobre
+ * los pedidos a través de endpoints RESTful.
+ * 
+ * @class PedidoController
+ * 
+ * @constructor
+ * @param {PedidoService} pedidoService - Instancia del servicio de pedidos
+ * que contiene la lógica de negocio.
+ * 
+ * @method crearPedido - Maneja las solicitudes POST para crear nuevos pedidos.
+ * @method obtenerPedidos - Maneja las solicitudes GET para obtener todos los pedidos.
+ * @method obtenerPedidoPorId - Maneja las solicitudes GET para obtener un pedido por ID.
+ * @method actualizarPedido - Maneja las solicitudes PUT/PATCH para actualizar pedidos.
+ * @method eliminarPedido - Maneja las solicitudes DELETE para eliminar pedidos.
+ * 
+ * @example
+ * const pedidoService = new PedidoService(pedidoRepository);
+ * const pedidoController = new PedidoController(pedidoService);
+ * 
+ * // En rutas de Express
+ * router.post('/pedidos', pedidoController.crearPedido);
+ * router.get('/pedidos', pedidoController.obtenerPedidos);
+ * router.get('/pedidos/:id', pedidoController.obtenerPedidoPorId);
+ * router.put('/pedidos/:id', pedidoController.actualizarPedido);
+ * router.delete('/pedidos/:id', pedidoController.eliminarPedido);
+ */
 class PedidoController {
   constructor(pedidoService) {
     this.pedidoService = pedidoService;

@@ -1,37 +1,11 @@
 /**
  * Servicio para la gestión de lógica de negocio de pedidos.
  * 
- * Esta clase actúa como una capa intermedia entre los controladores
- * y el repositorio, implementando la lógica de negocio relacionada
- * con los pedidos. Utiliza el patrón de inyección de dependencias
- * para recibir el repositorio que se utilizará para las operaciones
- * de persistencia.
- * 
  * @class PedidoService
  * 
  * @constructor
- * @param {PedidoRepository} pedidoRepository - Instancia del repositorio 
- * de pedidos que se utilizará para las operaciones de base de datos.
- * 
- * @method crearPedido - Crea un nuevo pedido calculando automáticamente
- * el total basado en los items proporcionados.
- * @method obtenerPedidos - Obtiene todos los pedidos existentes.
- * @method obtenerPedidoPorId - Obtiene un pedido específico por su ID.
- * @method actualizarPedido - Actualiza un pedido existente, recalculando
- * el total si se modifican los items.
- * @method eliminarPedido - Elimina un pedido existente.
- * 
- * @example
- * const pedidoRepository = new MongoDBPedidoRepository();
- * const pedidoService = new PedidoService(pedidoRepository);
- * 
- * // Crear un nuevo pedido
- * const nuevoPedido = await pedidoService.crearPedido({
- *   items: [
- *     { cantidad: 2, precio: 10 },
- *     { cantidad: 1, precio: 20 }
- *   ]
- * });
+ * @param {Object} pedidoRepository - Instancia del repositorio 
+ * de pedidos que implementa los métodos CRUD
  */
 class PedidoService {
   constructor(pedidoRepository) {

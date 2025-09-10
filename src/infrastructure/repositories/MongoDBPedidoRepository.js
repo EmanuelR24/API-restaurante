@@ -29,9 +29,8 @@
  * const pedidos = await pedidoRepository.obtenerTodos();
  */
 const Pedido = require('../../domain/models/Pedido');
-const PedidoRepository = require('../../application/use-cases/PedidoRepository');
 
-class MongoDBPedidoRepository extends PedidoRepository {
+class MongoDBPedidoRepository{
   async crear(pedidoData) {
     const pedido = new Pedido(pedidoData);
     return await pedido.save();

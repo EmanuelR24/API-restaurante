@@ -36,15 +36,25 @@ const cors = require('cors');
 const conectarDB = require('./src/infrastructure/database/mongodb');
 
 // Importaciones de la arquitectura
+
+// Pedido
 const PedidoService = require('./src/application/use-cases/PedidoService');
 const MongoDBPedidoRepository = require('./src/infrastructure/repositories/MongoDBPedidoRepository');
 const PedidoController = require('./src/infrastructure/controllers/PedidoController');
 const pedidosRouter = require('./src/routes/pedidos');
 
+// User
 const UsuarioService = require('./src/application/use-cases/UsuarioService');
 const MongoDBUsuarioRepository = require('./src/infrastructure/repositories/MongoDBUsuarioRepository');
 const UsuarioController = require('./src/infrastructure/controllers/UsuarioController');
 const usuariosRouter = require('./src/routes/usuarios');
+
+// Cliente
+const ClienteService = require('./src/application/use-cases/ClienteService');
+const MongoDBClienteRepository = require('./src/infrastructure/repositories/MongoDBClienteRepository');
+const ClienteController = require('./src/infrastructure/controllers/ClienteController');
+const clientesRouter = require('./src/routes/clientes');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,17 +64,26 @@ app.use(cors());
 app.use(express.json());
 
 // Inicializar dependencias
+
+// Pedido
 const pedidoRepository = new MongoDBPedidoRepository();
 const pedidoService = new PedidoService(pedidoRepository);
 const pedidoController = new PedidoController(pedidoService);
 
+// User
 const usuarioRepository = new MongoDBUsuarioRepository();
 const usuarioService = new UsuarioService(usuarioRepository);
 const usuarioController = new UsuarioController(usuarioService);
 
+// Cliente
+const clienteRepository = new MongoDBClienteRepository();
+const clienteService = new ClienteService(clienteRepository);
+const clienteController = new ClienteController(clienteService);
+
 // Rutas
 app.use('/pedidos', pedidosRouter(pedidoController));
 app.use('/usuarios', usuariosRouter(usuarioController));
+app.use('/clientes', clientesRouter(clienteController));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

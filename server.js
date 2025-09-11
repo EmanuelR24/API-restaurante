@@ -41,6 +41,11 @@ const MongoDBPedidoRepository = require('./src/infrastructure/repositories/Mongo
 const PedidoController = require('./src/infrastructure/controllers/PedidoController');
 const pedidosRouter = require('./src/routes/pedidos');
 
+const UsuarioService = require('./src/application/use-cases/UsuarioService');
+const MongoDBUsuarioRepository = require('./src/infrastructure/repositories/MongoDBUsuarioRepository');
+const UsuarioController = require('./src/infrastructure/controllers/UsuarioController');
+const usuariosRouter = require('./src/routes/usuarios');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -53,8 +58,13 @@ const pedidoRepository = new MongoDBPedidoRepository();
 const pedidoService = new PedidoService(pedidoRepository);
 const pedidoController = new PedidoController(pedidoService);
 
+const usuarioRepository = new MongoDBUsuarioRepository();
+const usuarioService = new UsuarioService(usuarioRepository);
+const usuarioController = new UsuarioController(usuarioService);
+
 // Rutas
 app.use('/pedidos', pedidosRouter(pedidoController));
+app.use('/usuarios', usuariosRouter(usuarioController));
 
 // Ruta de prueba
 app.get('/', (req, res) => {

@@ -1,5 +1,5 @@
 /**
- * Servicio para la gestión de lógica de negocio de clientes.
+ * Servicio para la gestión de lógica de cuentas de clientes.
  * 
  * @class ClienteService
  * 
@@ -13,7 +13,7 @@ class ClienteService {
   }
 
   async crearCliente(clienteData) {
-    // Verificar si el documento ya existe
+    // Verificamos si el documento ya existe
     const clienteExistente = await this.clienteRepository.obtenerPorDocumento(clienteData.documento);
     if (clienteExistente) {
       throw new Error('El documento ya está registrado');
@@ -39,7 +39,7 @@ class ClienteService {
   }
 
   async actualizarCliente(id, clienteData) {
-    // Si se actualiza el documento, verificar que no exista otro cliente con el mismo
+    // Verificamos que no exista
     if (clienteData.documento) {
       const clienteExistente = await this.clienteRepository.obtenerPorDocumento(clienteData.documento);
       if (clienteExistente && clienteExistente._id.toString() !== id) {

@@ -47,7 +47,7 @@ class MongoDBUsuarioRepository {
 
   async actualizar(id, usuarioData) {
     if (usuarioData.password) {
-      delete usuarioData.password; // La encriptación se maneja en el pre-save
+      delete usuarioData.password;
     }
     return await Usuario.findByIdAndUpdate(id, usuarioData, { 
       new: true, 
